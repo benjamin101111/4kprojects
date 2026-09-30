@@ -1,0 +1,250 @@
+---
+// src/components/Navigation.astro
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about-us" },
+  { name: "Visualisation", href: "/visualisation" },
+  { name: "Design Services", href: "/design-services" },
+  { name: "Other Services", href: "/other" },
+  { name: "How We Work", href: "/how-we-work" },
+  { name: "Why Us", href: "/why-us" },
+  { name: "Contact", href: "/contact" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<!-- 1. LOGO — sticky, top:30 left:30, 61px wide -->
+<a
+  href="/"
+  aria-label="4K Projects"
+  class="site-logo"
+>
+  <img
+    src="/images/logos/4k-logo-black.png"
+    alt="4K Projects Logo"
+    width="1765"
+    height="1523"
+    loading="eager"
+    decoding="async"
+  />
+</a>
+
+<!-- 2. BURGER BUTTON — geometry matches live dumps exactly -->
+<button
+  id="framer-burger-btn"
+  type="button"
+  aria-label="Toggle navigation menu"
+  aria-expanded="false"
+  class="site-burger"
+>
+  <span class="burger-box">
+    <span class="burger-bar line-top"></span>
+    <span class="burger-bar line-bottom"></span>
+  </span>
+</button>
+
+<!-- 3. DRAWER (unchanged structurally) -->
+<div id="drawer-root" class="drawer-root" aria-hidden="true">
+  <div id="drawer-backdrop" class="drawer-backdrop"></div>
+  <nav id="drawer-panel" class="drawer-panel">
+    <div class="drawer-links">
+      {navLinks.map((link, idx) => {
+        const isActive = currentPath === link.href || (link.href !== "/" && currentPath.startsWith(link.href));
+        return (
+          <a
+            href={link.href}
+            class:list={["nav-link-item", isActive && "is-active"]}
+            style={`--stagger-delay: ${180 + idx * 45}ms;`}
+          >
+            <span>{link.name}</span>
+          </a>
+        );
+      })}
+    </div>
+  </nav>
+</div>
+<style>
+  /* ── Logo ─────────────────────────────────────────────── */
+  .site-logo {
+    position: absolute;
+    top: 30px;
+    z-index: 40;
+    display: block;
+    width: 61px;
+    height: auto;
+    margin-left: 30px;
+    margin-top: 0px;
+    user-select: none;
+  }
+  .site-logo img {
+    display: block;
+    width: 61px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* ── Burger ──────────────────────────────────────────── */
+  .site-burger {
+    position: fixed;
+    top: -4.42px;
+    right: 0;
+    z-index: 50;
+    width: 137px;
+    height: 99px;
+    padding: 45px 50px 44px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .burger-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 67px;
+    height: 9px;
+    position: relative;
+  }
+
+  /* ── Burger bars: slow & buttery (600ms) — matches your original ── */
+  .burger-bar {
+    display: block;
+    height: 1px;
+    background-color: #000000;
+    transition:
+      width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.4s ease,
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .line-top    { width: 67px; }
+  .line-bottom { width: 26px; }
+
+  /* Open state: invert lengths & alignment.
+     Scoped to body.menu-open so it matches the JS toggle. */
+  body.menu-open .burger-box {
+    align-items: flex-start;
+  }
+  body.menu-open .line-top {
+    width: 26px;
+    background-color: #ffffff;
+  }
+  body.menu-open .line-bottom {
+    width: 67px;
+    background-color: #ffffff;
+  }
+
+  /* Mobile: shrink to live's 97×60 */
+  @media (max-width: 809px) {
+    .site-burger {
+      top: 15.08px;
+      width: 97px;
+      height: 60px;
+      padding: 28px 20px 22px 10px;
+    }
+  }
+
+  /* ── Drawer ──────────────────────────────────────────── */
+  .drawer-root {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    pointer-events: none;
+  }
+  .drawer-root.is-open { pointer-events: auto; }
+
+  .drawer-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.4);
+    backdrop-filter: blur(5px) brightness(0.8);
+    opacity: 0;
+    transition: opacity 0.7s ease-out;
+  }
+  .drawer-root.is-open .drawer-backdrop { opacity: 1; }
+
+  .drawer-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 420px;
+    background: #000;
+    color: #fff;
+    padding: 130px 50px 50px;
+    transform: translateX(100%);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto;
+  }
+  .drawer-root.is-open .drawer-panel { transform: translateX(0); }
+
+  .drawer-links { display: flex; flex-direction: column; gap: 0; }
+
+  /* ── Nav links: pure right-to-left glide (strictly X) ── */
+  .nav-link-item {
+    display: block;
+    padding: 6px 0;
+    opacity: 0;
+    transform: translateX(35px);
+    transition:
+      opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: 0ms;
+    will-change: transform, opacity;
+  }
+  .drawer-root.is-open .nav-link-item {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: var(--stagger-delay);
+  }
+  .nav-link-item span {
+    font-family: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", Georgia, serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.25em;
+    letter-spacing: -0.01em;
+    text-transform: capitalize;
+    color: #fff;
+  }
+  .nav-link-item.is-active span,
+  .nav-link-item:hover span {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>
+
+<script>
+  function initBurger() {
+    const btn = document.getElementById('framer-burger-btn');
+    const root = document.getElementById('drawer-root');
+    if (!btn || !root) return;
+
+    let isOpen = false;
+
+    function set(open: boolean) {
+      isOpen = open;
+      document.body.classList.toggle('menu-open', open);   // drives burger animation
+      root.classList.toggle('is-open', open);              // drives drawer + link stagger
+      root.setAttribute('aria-hidden', String(!open));
+      btn.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    btn.onclick = () => set(!isOpen);
+    const backdrop = document.getElementById('drawer-backdrop');
+    if (backdrop) backdrop.onclick = () => set(false);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) set(false);
+    });
+  }
+
+  initBurger();
+  document.addEventListener('astro:after-swap', initBurger);
+</script>

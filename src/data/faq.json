@@ -1,0 +1,22 @@
+[
+  {
+    "id": "faq-1",
+    "question": "What is your typical turnaround time?",
+    "answer": "Our turnaround time depends on project scope, but draft renders are typically delivered within 48 to 72 hours from receiving complete architectural drawings and material schedules."
+  },
+  {
+    "id": "faq-2",
+    "question": "How do you handle revisions?",
+    "answer": "We include two structured rounds of design revisions with every project to ensure the camera angles, lighting, materials, and dressing match your vision completely."
+  },
+  {
+    "id": "faq-3",
+    "question": "What file formats do you need to get started?",
+    "answer": "We accept AutoCAD (.dwg), Revit (.rvt), SketchUp (.skp), Rhino (.3dm), or PDF floorplans and elevations along with your material finishes and mood boards."
+  },
+  {
+    "id": "faq-4",
+    "question": "Can you handle large-scale commercial projects?",
+    "answer": "Yes. Our team of 20+ specialized 3D artists is scaled to deliver large commercial headquarters, multiple floorplates, and complex hospitality spaces on tight deadlines."
+  }
+]

@@ -1,0 +1,188 @@
+---
+// src/components/TeamSection.astro
+
+interface Props {
+  data: {
+    title: string;
+    subtitle: string;
+    members: Array<{
+      name: string;
+      role: string;
+      image: string;
+      info?: string;
+    }>;
+    highlight: { count: string; label: string; text: string };
+  };
+}
+
+const { data } = Astro.props;
+---
+
+<section id="team" class="team-section">
+  <div class="page-container">
+
+    <!-- SECTION HEADER -->
+    <div class="team-section__header">
+      <h2 class="section-heading">{data.title}</h2>
+      <p class="body-copy team-section__subtitle">{data.subtitle}</p>
+    </div>
+
+    <!-- TEAM CARDS GRID -->
+    <div class="team-grid">
+      {data.members.map((member) => {
+        const imageSrc = member.image.replace(/^public\//, "/");
+        return (
+          <a href="#" class="team-card group">
+            <div class="team-card__media">
+              <img
+                src={imageSrc}
+                alt={member.name}
+                width="896"
+                height="1088"
+                loading="lazy"
+                decoding="async"
+                class="team-card__img"
+              />
+              {member.info && (
+                <div class="team-card__overlay">
+                  <p class="body-copy">{member.info}</p>
+                </div>
+              )}
+            </div>
+            <h3 class="team-name team-card__name">{member.name}</h3>
+            <p class="team-role team-card__role">{member.role}</p>
+          </a>
+        );
+      })}
+    </div>
+
+    <!-- HIGHLIGHT PANEL -->
+    <div class="team-highlight">
+      <div class="team-highlight__count">
+        <span class="team-meta-number">{data.highlight.count}</span>
+        <span class="team-meta-label">{data.highlight.label}</span>
+      </div>
+      <p class="body-copy team-highlight__text">{data.highlight.text}</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .team-section {
+    position: relative;
+    z-index: 3;
+    background-color: var(--bg-page);
+    padding-top: var(--team-intro-pt);
+    padding-bottom: var(--team-intro-pb);
+  }
+
+  .team-section__header {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .team-section__subtitle {
+    max-width: 690px;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: var(--team-cols);
+    grid-auto-rows: var(--team-cell-h);
+    column-gap: var(--team-gap-x);
+    row-gap: var(--team-gap-y);
+    justify-content: center;
+  }
+
+  .team-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .team-card__media {
+    position: relative;
+    width: 100%;
+    height: 535px;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--text-primary, #000);
+    overflow: hidden;
+    background-color: var(--bg-page);
+  }
+
+  .team-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 300ms ease-out;
+  }
+
+  .team-card__overlay {
+    position: absolute;
+    inset: 0;
+    padding: 24px;
+    background-color: var(--bg-page);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+    overflow-y: auto;
+  }
+
+  .group:hover .team-card__overlay { opacity: 1; }
+  .group:hover .team-card__img { opacity: 0; }
+
+  .team-card__name {
+    margin-top: 20px;
+    padding-left: 20px;
+  }
+
+  .team-card__role {
+    margin-top: 8px;
+    padding-left: 20px;
+  }
+
+  /* HIGHLIGHT PANEL — mobile default: single column, 40px vertical gap */
+  .team-highlight {
+    margin-top: 40px;
+    padding: 30px;
+    border-radius: var(--radius-card);
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 40px;
+    align-items: start;
+  }
+
+  .team-highlight__count {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+    gap: 0;
+  }
+
+  .team-highlight__text {
+    max-width: 480px;
+  }
+
+  /* Desktop: two columns, text pushed to the right */
+  @media (min-width: 1200px) {
+    .team-highlight {
+      grid-template-columns: 1fr 2fr;
+      column-gap: 40px;
+      row-gap: 0;
+    }
+
+    .team-highlight__text {
+      justify-self: end;
+    }
+  }
+</style>

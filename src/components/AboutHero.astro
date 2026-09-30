@@ -1,0 +1,91 @@
+---
+// src/components/AboutHero.astro
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = "About",
+  subtitle = "We’ve all been there - your go-to 3D artist is on holiday, your backup guy is fully booked, and your deadline is getting uncomfortably close. You’re running out of options and the idea of trying a new CGI partner feels like a gamble. That moment, that feeling, is precisely what led us to build something different...",
+} = Astro.props;
+---
+
+<section class="about-hero hero-section">
+  <div class="about-hero__inner">
+    <div class="about-hero__title-box">
+      <h1 class="hero-title">{title}</h1>
+    </div>
+    <div class="about-hero__subtitle-box">
+      <p class="hero-subtitle">{subtitle}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-hero {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    width: 100%;
+    padding-top: var(--hero-pt);
+    padding-bottom: var(--hero-pb);
+    padding-left: var(--page-px);
+    padding-right: var(--page-px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: var(--hero-gap);
+    overflow: hidden;
+    background-color: var(--bg-page);
+  }
+
+  .about-hero__inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 40px; /* 40px on mobile (390px) */
+  }
+
+  .about-hero__title-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .about-hero__subtitle-box {
+    width: 100%;
+    word-break: break-all;
+    max-width: 350px; /* 390px width */
+  }
+
+  /* Tablet (810px+) */
+  @media (min-width: 810px) {
+    .about-hero__inner {
+      gap: 20px;
+    }
+    .about-hero__subtitle-box {
+      max-width: 712.5px;
+    }
+  }
+
+  /* Desktop (1200px+) */
+  @media (min-width: 1200px) {
+    .about-hero__inner {
+      gap: 20px; /* Verified from dump: y:200 + h:150 = 350 -> subtitle at y:370 */
+    }
+    .about-hero__subtitle-box {
+      max-width: 541.5px;
+    }
+  }
+
+  /* Wide Desktop (1440px+) */
+  @media (min-width: 1440px) {
+    .about-hero__subtitle-box {
+      max-width: 655.5px;
+    }
+  }
+</style>

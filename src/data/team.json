@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Jasper Thorne",
+    "role": "Founder & Design Director",
+    "bio": "Former commercial interior designer with 12+ years leading workplace visualization projects.",
+    "image": "/images/team/jasper-thorne.webp"
+  },
+  {
+    "name": "Elena Rostova",
+    "role": "Head of 3D Production",
+    "bio": "Oversees our artist studio, lighting pipelines, and photorealistic CGI quality standards.",
+    "image": "/images/team/elena-rostova.webp"
+  },
+  {
+    "name": "Marcus Vance",
+    "role": "Senior Project Manager",
+    "bio": "Architectural coordinator ensuring deliverables, schedule milestones, and revisions stay on track.",
+    "image": "/images/team/marcus-vance.webp"
+  }
+]

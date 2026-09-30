@@ -1,0 +1,91 @@
+{
+  "hero": {
+    "title": "About",
+    "lead": "We’ve all been there - your go-to 3D artist is on holiday, your backup guy is fully booked, and your deadline is getting uncomfortably close. You’re running out of options and the idea of trying a new CGI partner feels like a gamble. That moment, that feeling, is precisely what led us to build something different...",
+    "heroImages": ["{/images/aboutHeroAssets/about-asset-1.webp}", "{/images/aboutHeroAssets/about-asset-2.webp}", "{/images/aboutHeroAssets/about-asset-3.webp}"],
+    "heroImageAlt": "4K Projects luxury interior architectural visualization"
+  },
+  "story": {
+    "title": "Our story",
+    "paragraphs": [
+      "4K Projects was born from the exact experience described above: frustration with the pain of CGI outsourcing: off-the-shelf and missed deadlines, poor communication, and having to spoon-feed requirements to teams who simply didn't get it.",
+      "We'd faced those frustrations ourselves as project leaders, so we decided to build the solution we needed.",
+      "Today, we're a team of 22+ vetted artists, led by experienced studio directors who've been exactly where you are now. They understand our space design challenges, speak your language, and know instantly what you mean without lengthy explanations.",
+      "We've built the studio we wished we'd had access to — one that delivers speed and quality without the usual headaches. Our project managers aren't just coordinators: they're former designers who understand your pressures, deadlines, and client expectations.",
+      "We've been in your shoes, and we know what truly matters."
+    ]
+  },
+  "team": {
+    "title": "The 4K team",
+    "subtitle": "We've all been there — your go-to 3D artist is on holiday, your team is full to capacity, and your deadline is coming uncomfortably close. You're running out of options and the idea of relying on an CGI outsourced team feels like a gamble. That feeling of frustration is precisely what led us to build something different.",
+    "members": [
+      {
+        "name": "Jon Medlock",
+        "role": "Director",
+        "info": "Jon founded 4K Projects in 2016 after spending nearly a decade at one of London's leading workplace design firms. During his time there, he was regularly responsible for outsourcing CGIs and experienced firsthand the challenges that come with the process. This experience shaped his understanding of what designers need from their visualization partners.",
+        "image": "public/images/team/jon-medlock.webp"
+      },
+      {
+        "name": "Anna Kawalec",
+        "role": "Associate Director",
+        "info": "Anna joined 4K Projects in 2017, having previously worked alongside Jon for many years in workplace design. As our longest-serving project manager, she brings extensive industry knowledge and understands the nuances of commercial projects inside out. Her deep experience in workplace design makes her an invaluable bridge between creative vision and practical delivery.",
+        "image": "public/images/team/anna-kawalec.webp"
+      },
+      { 
+        "name": "Georgia Grigoriadi",
+        "role": "Studio Manager",
+        "info": "Georgia joined 4K Projects after working extensively with workplace design clients, giving her deep insight into the industry from both sides. She now oversees day-to-day operations, ensuring projects run smoothly and resources are allocated effectively. Her industry experience and problem-solving skills make her instrumental in delivering consistent results across all our projects.", 
+        "image": "public/images/team/georgia-grigoriadi.webp"
+      },
+      {
+        "name": "Giulia Zanotti", 
+        "role": "Project Manager",
+        "info": "Giulia worked alongside Jon and Anna at a leading workplace design firm before joining the 4K Projects team. With several years of experience managing projects here, she brings both exceptional design skills and deep industry knowledge. Her background as a designer herself makes her perfectly positioned to understand and deliver on complex workplace requirements.",
+        "image": "public/images/team/giulia-zanotti.webp"
+      },
+      {
+        "name": "Paola Maria Baliki",
+        "role": "Project Manager",
+        "info": "Paola joined 4K Projects in 2023, bringing strong interior design credentials and solid workplace knowledge to the team. Her design background proves invaluable in understanding client intentions and ensuring projects run smoothly from a creative perspective. Having delivered numerous projects since joining, her design expertise helps bridge the gap between client vision and final delivery.",
+        "image": "public/images/team/paola-maria-baliki.webp"
+      },
+      {
+        "name": "Namik Pirkic",
+        "role": "Art Director",
+        "info": "Namik has been with 4K Projects almost since day one, bringing extensive experience as a former art director at a leading European 3D visualization company. As our art director and senior 3D artist, he ensures consistency across all projects, maintaining quality standards regardless of which artists are assigned to different aspects of larger commissions.",
+        "image": "public/images/team/namik-pirkic.webp"
+      }
+    ],
+    "highlight": {
+      "count": "22+",
+      "label": "ARTISTS",
+      "text": "Our team of 20+ talented 3D artists represents the best of the best. Over the years, we've tested well over 150 artists, maintaining strict criteria to ensure only exceptional talent joins our team. The quality of work they consistently produce continues to exceed expectations, bringing designs to life with remarkable skill and attention to detail."
+    }
+  },
+  "faq": [
+    {
+      "q": "Do you offer other types of CGIs like residential?",
+      "a": "Yes, while our core focus has historically been commercial and workplace spaces, we regularly produce high-end residential, mixed-use, and hospitality architectural visualisations."
+    },
+    {
+      "q": "Why should we hire you when our usual guy can create similar result at half the cost?",
+      "a": "Because consistency, reliability, and speed safeguard your bottom line. We provide dedicated UK-based creative directors and project managers who speak designer language, guaranteeing zero missed deadlines and complete project accountability."
+    },
+    {
+      "q": "What do you charge?",
+      "a": "We operate with upfront, fixed-cost pricing based on project scope. No hidden fees or unexpected overruns."
+    },
+    {
+      "q": "How many changes can I make?",
+      "a": "All projects include structured feedback rounds (clay render stage, draft render stage, and final adjustments) so you're always in complete control."
+    },
+    {
+      "q": "What's your availability like?",
+      "a": "With our studio scale of 22+ artists, we can accommodate urgent turnarounds and large multi-shot packages without lead-time bottlenecks."
+    },
+    {
+      "q": "I have an urgent request, when can I get a quote by?",
+      "a": "Usually within a couple of hours during standard UK business hours."
+    }
+  ]
+}

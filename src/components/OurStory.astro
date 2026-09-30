@@ -1,0 +1,31 @@
+---
+// src/components/OurStory.astro
+interface Props {
+  title: string;
+  lead: string;
+  paragraphs: string[];
+}
+
+const { title, lead, paragraphs } = Astro.props;
+---
+
+<section class="story-nav">
+  <div class="w-full max-w-[1380px] flex flex-col lg:flex-row justify-between gap-[var(--nav-gap)]">
+    <div class="lg:w-auto">
+      <h2 class="section-heading text-[color:var(--text-on-dark)]">{title}</h2>
+    </div>
+
+    <div class="flex flex-col items-start" style="width: 461px; max-width: 100%;">
+      <p class="hero-subtitle text-[color:var(--text-on-dark)] m-0">{lead}</p>
+
+      {paragraphs.map((p, i) => (
+        <p
+          class="body-copy text-[color:var(--text-on-dark)]"
+          style={`margin-top: ${i === 0 ? '20px' : '20px'};`}
+        >
+          {p}
+        </p>
+      ))}
+    </div>
+  </div>
+</section>

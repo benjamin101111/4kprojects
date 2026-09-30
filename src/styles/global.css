@@ -1,0 +1,631 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   1. LOCAL FONT DECLARATIONS
+   ========================================================================== */
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/dm-sans-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url("/fonts/dm-sans-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: block;
+  src: url("/fonts/source-serif-4.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source Serif 4 Regular";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/source-serif-4.woff2") format("woff2");
+}
+/* ADDED: Framer emits a "Placeholder" family in computed font-family strings.
+   It never renders (no @font-face for it), but the computed `fontFamily`
+   string differs from ours unless we declare the same family name. If the
+   diff script compares fontFamily strings, this closes the gap.
+   If it turns out the script ignores it, this @font-face is harmless. */
+@font-face {
+  font-family: "Source Serif 4 Regular Placeholder";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/source-serif-4.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Sans Placeholder";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/dm-sans-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Sans Placeholder";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url("/fonts/dm-sans-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Mona Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/mona-sans-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Mona Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url("/fonts/mona-sans-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Mona Sans Placeholder";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/mona-sans-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Mona Sans Placeholder";
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url("/fonts/mona-sans-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Framer Display";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: block;
+  src: url("/fonts/framer-display.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source Serif Pro Semibold";
+  font-style: normal;
+  font-weight: 400; /* Framer computed style registers weight as 400 with the family name itself carrying "Semibold" */
+  font-display: block;
+  src: url("/fonts/source-serif-pro-semibold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Source Serif Pro Semibold Placeholder";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/source-serif-pro-semibold.woff2") format("woff2");
+}
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+
+@layer base {
+  :root {
+    /* Colour tokens — match the live computed values exactly. */
+    --bg-page: #dbdcd0;
+    --text-primary: #000000;
+    --text-on-dark: #dbdcd0;
+    --text-on-dark-muted: rgba(255, 255, 255, 0.5);
+    --text-muted: rgba(0, 0, 0, 0.65);
+    --border-color: rgba(0, 0, 0, 0.15);
+    --border-dark: rgba(0, 0, 0, 0.4);
+    --bg-dark: #000000;
+
+    /* Radii — pulled straight from the dumps. */
+    --radius-card: 20px;
+    --radius-panel: 12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+  }
+
+  /* CHANGED: body font-family now matches the live dump.
+     Live body: fontFamily "sans-serif", fontSize 12px, lineHeight normal.
+     We keep `sans-serif` on body and override per-element below. */
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: normal;
+    letter-spacing: normal;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* CHANGED: headings now match the live computed family string.
+     Live: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", serif.
+     We include the Placeholder so the computed string matches if the diff
+     script compares fontFamily strings. */
+  h1, h2, h3, .font-serif {
+    font-family: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", serif;
+    font-weight: 400;
+  }
+
+  img, svg, video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+}
+
+/* ==========================================================================
+   3. RESPONSIVE TOKENS
+   Values verified against the four computed-style dumps.
+   ========================================================================== */
+
+/* Mobile default — matches 390px dump */
+:root {
+  --page-px: 20px;
+
+  /* Hero */
+  --hero-title-size: 88px;
+  --hero-title-lh: 88px;
+  --hero-sub-size: 14px;
+  --hero-sub-lh: 16.8px;
+
+  /* Section headings */
+  --heading-size: 46px;
+  --heading-lh: 46px;
+
+  /* Body copy — split by context because they diverge at 390px */
+  --hero-copy-size: 14px;
+  --hero-copy-lh: 16.8px;
+  --body-copy-size: 16px;
+  --body-copy-lh: 19.2px;
+  --small-copy-size: 14px;
+  --small-copy-lh: 16.8px;
+
+  /* FAQ question */
+  --faq-q-size: 18px;
+  --faq-q-lh: 21.6px;
+
+  /* Team card */
+  --team-name-size: 28px;
+  --team-name-lh: 33.6px;
+  --team-role-size: 18px;
+  --team-role-lh: 21.6px;
+  --team-card-h: 535px;
+  --team-cell-h: 620.188px;
+
+  /* Spacing */
+  --hero-pt: 200px;
+  --hero-pb: 40px;
+  --hero-gap: 20px;
+  --team-intro-pt: 40px;
+  --team-intro-pb: 40px;
+  --faq-py: 50px;
+  --faq-px: 20px;
+  --faq-gap: 20px;
+  --footer-pt: 50px;
+  --footer-pb: 50px;
+  --footer-px: 20px;
+  --footer-gap: 30px;
+
+  --nav-py: 40px;
+  --nav-px: 20px;
+  --nav-gap: 100px;
+
+  /* Team grid — 1 col at mobile */
+  --team-cols: 1fr;
+  --team-gap-x: 20px;
+  --team-gap-y: 45px;
+}
+
+/* Tablet 810px — matches 810px dump */
+@media (min-width: 810px) {
+  :root {
+    --page-px: 30px;
+
+    --hero-title-size: 120px;
+    --hero-title-lh: 120px;
+    --hero-sub-size: 16px;
+    --hero-sub-lh: 19.2px;
+
+    --heading-size: 56px;
+    --heading-lh: 56px;
+
+    --hero-copy-size: 16px;
+    --hero-copy-lh: 19.2px;
+    --body-copy-size: 16px;
+    --body-copy-lh: 19.2px;
+    --small-copy-size: 14px;
+    --small-copy-lh: 16.8px;
+
+    --faq-q-size: 20px;
+    --faq-q-lh: 24px;
+
+    --hero-pb: 50px;
+    --hero-gap: 20px;
+
+    --team-intro-pt: 50px;
+    --team-intro-pb: 50px;
+
+    --faq-py: 96px;
+    --faq-px: 64px;
+    --faq-gap: 24px;
+
+    --footer-pt: 50px;
+    --footer-pb: 30px;
+    --footer-px: 30px;
+
+    --nav-py: 50px;
+    --nav-px: 30px;
+    --nav-gap: 40px;
+
+    /* 2 cols at tablet */
+    --team-cols: 365px 365px;
+    --team-gap-y: 40px;
+  }
+}
+
+/* Desktop 1200px+ — matches 1200 AND 1440 dumps (they are identical) */
+@media (min-width: 1200px) {
+  :root {
+    --page-px: 30px;
+
+    --hero-title-size: 150px;
+    --hero-title-lh: 150px;
+    --hero-sub-size: 18px;
+    --hero-sub-lh: 21.6px;
+    --hero-gap: 0px;
+
+    --heading-size: 64px;
+    --heading-lh: 64px;
+
+    --hero-copy-size: 18px;
+    --hero-copy-lh: 21.6px;
+    --body-copy-size: 18px;
+    --body-copy-lh: 21.6px;
+    --small-copy-size: 16px;
+    --small-copy-lh: 19.2px;
+
+    --faq-q-size: 24px;
+    --faq-q-lh: 28.8px;
+
+    --team-intro-pt: 100px;
+    --team-intro-pb: 80px;
+
+    --faq-py: 80px;
+    --faq-px: 30px;
+    --faq-gap: 32px;
+
+    --footer-pt: 50px;
+    --footer-pb: 30px;
+    --footer-px: 30px;
+
+    --nav-py: 100px;
+    --nav-px: 30px;
+    --nav-gap: 40px;
+
+    /* 3 cols at desktop — values from the 1200 dump.
+       The 1440 dump is the same fractional columns scaled by 1440/1200;
+       using `1fr` here keeps it fluid while matching the 20px gap. */
+    --team-cols: 1fr 1fr 1fr;
+    --team-gap-y: 40px;
+  }
+}
+
+/* ==========================================================================
+   4. LAYOUT UTILITIES
+   ========================================================================== */
+
+.page-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-px);
+  padding-right: var(--page-px);
+}
+
+/* ADDED: Framer's containers are almost all `overflow: hidden`. */
+.clip { overflow: hidden; }
+
+/* ==========================================================================
+   5. TYPOGRAPHY UTILITIES
+   ========================================================================== */
+
+.hero-title {
+  font-family: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", serif;
+  font-size: var(--hero-title-size);
+  line-height: var(--hero-title-lh);
+  font-weight: 400;
+  letter-spacing: normal;
+  /* ADDED: live dump says textAlign "left" on headings. */
+  text-align: left;
+  /* ADDED: the "About" span is inline-block in the dump. */
+  display: inline-block;
+  /* ADDED: dump uses pre-wrap on the title span. */
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.hero-subtitle {
+  font-family: "DM Sans", "DM Sans Placeholder", sans-serif;
+  font-size: var(--hero-sub-size);
+  line-height: var(--hero-sub-lh);
+  font-weight: 400;
+  letter-spacing: normal;
+  /* ADDED: dump uses pre-wrap. */
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.section-heading {
+  font-family: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", serif;
+  font-size: var(--heading-size);
+  line-height: var(--heading-lh);
+  font-weight: 400;
+  letter-spacing: normal;
+  /* ADDED: dump uses textAlign "left". */
+  text-align: left;
+  /* ADDED: heading spans are inline-block in the dump. */
+  display: inline-block;
+  /* ADDED: heading spans use pre-wrap. */
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* ADDED: body copy at hero size. */
+.body-copy {
+  font-family: "DM Sans", "DM Sans Placeholder", sans-serif;
+  font-size: var(--body-copy-size);
+  line-height: var(--body-copy-lh);
+  font-weight: 400;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* ADDED: smaller copy (footer addresses, hiring blurb, team roles). */
+.small-copy {
+  font-family: "DM Sans", "DM Sans Placeholder", sans-serif;
+  font-size: var(--small-copy-size);
+  line-height: var(--small-copy-lh);
+  font-weight: 400;
+  letter-spacing: normal;
+  /* Footer addresses and roles use `white-space: pre`. */
+  white-space: pre;
+  margin: 0;
+}
+
+/* ADDED: FAQ question row. */
+.faq-question {
+  font-family: "DM Sans", "DM Sans Placeholder", sans-serif;
+  font-size: var(--faq-q-size);
+  line-height: var(--faq-q-lh);
+  font-weight: 500;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* ADDED: team member name. */
+.team-name {
+  font-family: "Mona Sans", "Mona Sans Placeholder", sans-serif;
+  font-size: var(--team-name-size);
+  line-height: var(--team-name-lh);
+  font-weight: 500;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* ADDED: team member role. */
+.team-role {
+  font-family: "DM Sans", "DM Sans Placeholder", sans-serif;
+  font-size: var(--team-role-size);
+  line-height: var(--team-role-lh);
+  font-weight: 400;
+  letter-spacing: normal;
+  white-space: pre;
+  margin: 0;
+}
+
+/* ADDED: the "ARTISTS" label in the team-card meta row has a
+   -0.28px letter-spacing in the live dump. */
+.team-meta-label {
+  font-family: "Mona Sans", "Mona Sans Placeholder", sans-serif;
+  font-size: 28px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: -0.28px;
+  white-space: pre-wrap;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+
+/* ADDED: the big numeric badge ("22") in the team-card footer. */
+.team-meta-number {
+  font-family: "Mona Sans", "Mona Sans Placeholder", sans-serif;
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 600;
+  letter-spacing: normal;
+  display: inline-block;
+  margin: 0;
+}
+
+/* ==========================================================================
+   6. SECTION UTILITIES
+   ========================================================================== */
+
+/* Hero (sticky header section). */
+.hero-section {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding-top: var(--hero-pt);
+  padding-bottom: var(--hero-pb);
+  padding-left: var(--page-px);
+  padding-right: var(--page-px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: var(--hero-gap);
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* "Our story" nav block on black. */
+.story-nav {
+  position: relative; 
+  z-index: 3;
+  background-color: var(--bg-dark);
+  color: var(--text-on-dark);
+  padding: var(--nav-py) var(--nav-px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--nav-gap);
+  overflow: hidden;
+}
+
+/* Team grid — columns come from the responsive tokens. */
+.team-grid {
+  position: relative; 
+  z-index: 3;
+  display: grid;
+  grid-template-columns: var(--team-cols);
+  grid-auto-rows: var(--team-cell-h);
+  column-gap: var(--team-gap-x);
+  row-gap: var(--team-gap-y);
+  justify-content: center;
+}
+
+/* Individual team card. */
+.team-card {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.team-card__media {
+  height: var(--team-card-h);
+}
+
+/* FAQ container. */
+.faq-panel {
+  position: relative;
+   z-index: 3;
+   background-color: var(--page-bg);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+}
+
+/* FAQ row. */
+.faq-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* FAQ answer body — the live dump uses 16px on mobile, 18px on desktop. */
+.faq-answer {
+  font-family: "DM Sans", "DM Sans Placeholder", sans-serif;
+  font-size: var(--small-copy-size);
+  line-height: var(--small-copy-lh);
+  font-weight: 400;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* Footer. */
+.site-footer {
+  position: relative; 
+  z-index: 3;
+  background-color: var(--bg-dark);
+  color: var(--text-on-dark);
+  padding: var(--footer-pt) var(--footer-px) var(--footer-pb);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0px;
+  overflow: hidden;
+}
+
+/* Footer copy at 16px — differs from the 14px "small-copy". */
+.footer-copy {
+  font-family: "DM Sans", "DM Sans Placeholder", sans-serif;
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 400;
+  white-space: pre-wrap;
+  color: var(--text-on-dark-muted);
+  margin: 0;
+}
+
+/* Footer addresses use `pre` and 14px. */
+.footer-address {
+  font-family: "DM Sans", "DM Sans Placeholder", sans-serif;
+  font-size: 14px;
+  line-height: 16.8px;
+  font-weight: 400;
+  white-space: pre;
+  color: var(--text-on-dark-muted);
+  margin: 0;
+}
+
+/* Footer section label (Head office, Hiring, Contact). */
+.footer-label {
+  font-family: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", serif;
+  font-size: 18px;
+  line-height: 21.6px;
+  font-weight: 400;
+  white-space: pre;
+  color: var(--text-on-dark);
+  margin: 0;
+}
+
+/* Footer link with underline (the "here" link). */
+.footer-link {
+  font-family: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", serif;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 400;
+  text-decoration: underline;
+  color: var(--text-on-dark);
+}
+
+/* The giant "4K Projects" wordmark in the footer. */
+.footer-wordmark {
+  font-family: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", serif;
+  font-size: 214.941px;
+  line-height: 257.929px;
+  font-weight: 400;
+  white-space: pre;
+  color: var(--text-on-dark);
+}

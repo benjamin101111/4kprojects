@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+
+import AboutHero from '../components/AboutHero.astro';
+import WorkSlider from '../components/WorkSlider.astro';
+import OurStory from '../components/OurStory.astro';
+import TeamSection from '../components/TeamSection.astro';
+import FAQSection from '../components/FAQSection.astro';
+import Footer from '../components/Footer.astro';
+
+import content from '../data/about.json';
+---
+
+<Layout title="About Us | 4K Projects">
+  <Header />
+  <main>
+    <!-- 1. STICKY HERO (z-index: 1) -->
+    <AboutHero 
+      title={content.hero.title} 
+      subtitle={content.hero.lead} 
+    />
+
+    <!-- 2. WORK SLIDER (900px, z-index: 9, scrolls over the hero) -->
+    <WorkSlider 
+      slides={content.hero.slides} 
+    />
+
+    <!-- 3. OUR STORY SECTION (Solid Black) -->
+    <OurStory 
+      title={content.story.title} 
+      paragraphs={content.story.paragraphs} 
+    />
+
+    <!-- 4. THE 4K TEAM -->
+    <TeamSection 
+      data={content.team} 
+    />
+
+    <!-- 5. FAQ SECTION -->
+    <FAQSection 
+      questions={content.faq} 
+    />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,189 @@
+---
+// src/components/Footer.astro
+const logoGrey = "/images/logos/4k-logo-grey.png";
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+
+    <!-- TOP ROW -->
+    <div class="footer-top">
+      <div class="footer-logo">
+        <a href="/" aria-label="4K Projects">
+          <img src={logoGrey} alt="4K Projects" width="1765" height="1523" loading="lazy" />
+        </a>
+      </div>
+
+      <div class="footer-headline">
+        <h2 class="footer-headline__line">Architectural visualisation outsourcing</h2>
+        <h2 class="footer-headline__line">As easy as it should be.</h2>
+      </div>
+
+      <div class="footer-cta">
+        <a href="/contact" class="footer-cta__link">See our work</a>
+      </div>
+
+      <div class="footer-prompt">
+        <h6 class="footer-prompt__text">
+          Get started with us by clicking
+          <a href="/contact" class="footer-link">here</a>
+        </h6>
+      </div>
+    </div>
+
+    <!-- MIDDLE ROW -->
+    <div class="footer-mid">
+      <div class="footer-col footer-col--logo">
+        <img src="/images/logos/british-industry-partner.png"
+             alt="BIID Industry Partner"
+             loading="lazy" />
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-label">Head office</p>
+        <p class="footer-address">160 kemp house City road, London EC1V 2NX</p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-label">Hiring</p>
+        <p class="footer-copy">
+          We are always on the lookout for exciting new talent. If you are interested in working with us, either as a 3D artist or a project manager.
+        </p>
+        <p class="footer-copy">
+          Please drop us a message at:
+          <a href="mailto:hiring@4kprojects.com" class="footer-link-inline">hiring@4kprojects.com</a>
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-label">Contact</p>
+        <p class="footer-copy">
+          Be it a quote request, some feedback or you'd just like to say hello, we'd love to hear from you. Reach us at:
+        </p>
+        <p class="footer-copy">
+          <a href="mailto:info@4kprojects.com" class="footer-link-inline">info@4kprojects.com</a>
+        </p>
+        <p class="footer-copy">
+          <a href="tel:+442033557507" class="footer-link-inline">+44 20 3355 7507</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- BOTTOM: WORDMARK -->
+    <div class="footer-wordmark-wrap">
+      <p class="footer-wordmark">4K Projects</p>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  .footer-inner {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 var(--page-px);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 147px 1fr 443px;
+    gap: 20px;
+    align-items: start;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-logo img { width: 147px; height: auto; display: block; }
+
+  .footer-headline__line {
+    font-family: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", serif;
+    font-size: 28px;
+    line-height: 33.6px;
+    font-weight: 400;
+    color: var(--text-on-dark);
+    margin: 0;
+  }
+
+  .footer-cta__link {
+    font-family: "DM Sans", "DM Sans Placeholder", sans-serif;
+    font-size: 20px;
+    line-height: 22px;
+    color: var(--text-on-dark);
+    border-bottom: 1px solid var(--text-on-dark);
+    padding-bottom: 2px;
+  }
+
+  .footer-prompt__text {
+    font-family: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", serif;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 400;
+    color: var(--text-on-dark);
+    margin: 0;
+    white-space: pre;
+  }
+
+  .footer-link {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-decoration: underline;
+    color: var(--text-on-dark);
+  }
+
+  .footer-link-inline {
+    color: var(--text-on-dark-muted);
+    text-decoration: none;
+  }
+  .footer-link-inline:hover { text-decoration: underline; }
+
+  /* MIDDLE */
+  .footer-mid {
+    display: grid;
+    grid-template-columns: 170px 131px 479px 479px;
+    gap: 40px;
+    align-items: start;
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-col { display: flex; flex-direction: column; gap: 8px; }
+  .footer-col--logo img { width: 170px; height: auto; }
+
+  /* BOTTOM */
+  .footer-wordmark-wrap {
+    padding-top: 40px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .footer-wordmark {
+    font-family: "Source Serif 4 Regular", "Source Serif 4 Regular Placeholder", serif;
+    font-size: 214.941px;
+    line-height: 257.929px;
+    font-weight: 400;
+    letter-spacing: normal;
+    color: var(--text-on-dark);
+    margin: 0;
+    white-space: pre;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1199px) {
+    .footer-top { grid-template-columns: 147px 1fr; }
+    .footer-cta, .footer-prompt { grid-column: 1 / -1; }
+    .footer-mid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+
+  @media (max-width: 809px) {
+    .footer-top { grid-template-columns: 1fr; gap: 30px; }
+    .footer-mid { grid-template-columns: 1fr; gap: 30px; }
+    .footer-wordmark { font-size: 88px; line-height: 105px; }
+  }
+</style>

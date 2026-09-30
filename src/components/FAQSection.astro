@@ -1,0 +1,134 @@
+---
+// src/components/FAQSection.astro
+interface Props {
+  questions: Array<{ q: string; a: string }>;
+}
+
+const { questions } = Astro.props;
+---
+
+<section class="faq-section">
+  <div class="faq-section__inner">
+    <!-- Left sticky title -->
+    <div class="faq-section__title">
+      <h2 class="section-heading">Frequently<br />Asked Questions</h2>
+    </div>
+
+    <!-- Right accordion -->
+    <div class="faq-list">
+      {questions.map((item, index) => (
+        <div class="faq-item" data-index={index}>
+          <button
+            type="button"
+            class="faq-question-row"
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}
+            id={`faq-question-${index}`}
+          >
+            <h6 class="faq-question">{item.q}</h6>
+            <span class="faq-icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+            </span>
+          </button>
+          <div
+            id={`faq-answer-${index}`}
+            class="faq-answer-wrap"
+            role="region"
+            aria-labelledby={`faq-question-${index}`}
+            hidden
+          >
+            <p class="faq-answer">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    position: relative; 
+    z-index: 3;
+    padding: var(--faq-py) var(--faq-px);
+    background-color: var(--bg-page);
+  }
+
+  /* CHANGED: two-column at 1200+, stacked below. */
+  .faq-section__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  @media (min-width: 1200px) {
+    .faq-section__inner {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 128px; /* from the dump */
+    }
+    .faq-section__title { flex: 1 1 50%; position: sticky; top: var(--faq-py);  }
+    .faq-list { flex: 1 1 50%; }
+  }
+
+  .faq-item {
+    border-bottom: 1px solid  black;
+  }
+  .faq-item:first-child {
+    border-top: 0px solid var(--border-color);
+  }
+
+  /* CHANGED: row is 72px tall (single line) with 20px vertical padding. */
+  .faq-question-row {
+    width: 100%;
+    padding: 20px 20px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .faq-icon {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 200ms ease;
+  }
+
+  .faq-item.is-open .faq-icon {
+    transform: rotate(90deg);
+  }
+
+  .faq-answer-wrap {
+    padding: 0 20px 20px 0;
+  }
+</style>
+
+<script>
+  function initFaq() {
+    document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
+      const btn = item.querySelector<HTMLButtonElement>('.faq-question-row');
+      const answer = item.querySelector<HTMLElement>('.faq-answer-wrap');
+      if (!btn || !answer) return;
+
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+        answer.hidden = !isOpen;
+      });
+    });
+  }
+
+  initFaq();
+  document.addEventListener('astro:page-load', initFaq);
+</script>
