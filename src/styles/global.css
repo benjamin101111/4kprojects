@@ -540,7 +540,7 @@
 .faq-panel {
   position: relative;
    z-index: 3;
-   background-color: var(--page-bg);
+  background-color: var(--bg-page);
   border-radius: var(--radius-panel);
   overflow: hidden;
 }

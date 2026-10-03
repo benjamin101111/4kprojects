@@ -7,7 +7,7 @@ const HEIGHT = 1000;
 
 const TARGETS = {
   live:  'https://4kprojects.com/about-us',
-  local: 'http://localhost:4321/about-us',
+  local: 'http://localhost:4321/',
 };
 
 function parseArgs(argv) {
