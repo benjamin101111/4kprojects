@@ -58,7 +58,8 @@ const biid = "/images/logos/british-industry-partner.png";
 
         <div class="footer-col footer-col--contact">
           <p class="footer-label">Contact</p>
-          <p class="footer-copy">Be it a quote request, some feedback or you'd just like to say hello, we'd love to hear from you. Reach us at:</p>
+          <p class="footer-copy">Be it a quote request, some feedback or you'd just like to say hello, we'd love to hear from you.</p>
+          <p class="footer-copy"><a href="mailto:info@4kprojects.com" class="footer-link-inline">Reach us at:</a></p>
           <p class="footer-copy"><a href="mailto:info@4kprojects.com" class="footer-link-inline">info@4kprojects.com</a></p>
           <p class="footer-copy"><a href="tel:+442033557507" class="footer-link-inline">+44 20 3355 7507</a></p>
         </div>
@@ -66,15 +67,22 @@ const biid = "/images/logos/british-industry-partner.png";
     </div>
 
     <!-- BOTTOM: WORDMARK -->
-    <div class="footer-wordmark-wrap" aria-hidden="true">
-      <svg
-  class="footer-wordmark-svg"
-  viewBox="0 0 1140 258"
-  preserveAspectRatio="xMidYMid meet"
->
-  <text x="0" y="214" class="footer-wordmark-text">4K Projects</text>
-</svg>
-    </div>
+    <!-- BOTTOM: WORDMARK -->
+<div class="footer-wordmark-wrap" aria-hidden="true">
+  <svg
+    class="footer-wordmark-svg"
+    viewBox="0 0 1140 280"
+    preserveAspectRatio="xMinYMin meet"
+  >
+    <text
+      x="0"
+      y="214"
+      textLength="100%"
+      lengthAdjust="spacing"
+      class="footer-wordmark-text"
+    >4K Projects</text>
+  </svg>
+</div>
 
   </div>
 </footer>
@@ -290,21 +298,24 @@ const biid = "/images/logos/british-industry-partner.png";
   .footer-link-inline:hover { text-decoration: underline; }
 
   /* ===== WORDMARK ===== */
-  .footer-wordmark-wrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 30px;
-    width: 100%;
-    overflow: hidden;
-    z-index: 10;
-  }
-  .footer-wordmark-svg {
+  /* ===== WORDMARK ===== */
+.footer-wordmark-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start; /* Changed from center to flex-start */
+  width: 100%;
+  overflow: visible;       /* Ensure descenders don't get cut by wrapper */
+  z-index: 10;
+}
+
+.footer-wordmark-svg {
   display: block;
   width: 100%;
   height: auto;
+  overflow: visible;       /* Prevents clipping if font metrics render larger */
 }
+
 .footer-wordmark-text {
   font-family: "Source Serif 4 Regular", serif;
   font-size: 214.941px;
